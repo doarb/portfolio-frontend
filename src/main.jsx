@@ -8,17 +8,25 @@ import {
 import ErrorPage from "./error-page";
 import Root from "./routes/root";
 import SignIn from "./routes/signin";
+import About from './routes/about';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+
+
     errorElement: <ErrorPage />,
     children: [
       {
         
         path: "/signin",
         element: <SignIn />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/",
+        element: <About />,
         errorElement: <ErrorPage />,
       },
       

@@ -14,9 +14,10 @@ export default function Root() {
               <a href="/" className="text-gray-800 hover:text-gray-600">
                 Accueil
               </a>
-              <a href="/projects" className="text-gray-800 hover:text-gray-600">
+              <NavLink to="/projects" className="text-gray-800 hover:text-gray-600">
                 Projects
-              </a>
+              </NavLink>
+              
             </nav>
             <NavLink to="/signin" className="text-gray-800 hover:text-gray-600">
 

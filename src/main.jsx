@@ -9,6 +9,9 @@ import ErrorPage from "./error-page";
 import Root from "./routes/root";
 import SignIn from "./routes/signin";
 import About from './routes/about';
+import Projects, {loader as projectsLoader} from './routes/projects';
+import Project, {loader as projectLoader} from './routes/project';
+
 
 const router = createBrowserRouter([
   {
@@ -29,6 +32,18 @@ const router = createBrowserRouter([
         element: <About />,
         errorElement: <ErrorPage />,
       },
+      {
+        path: "/projects",
+        element: <Projects />,
+        loader: projectsLoader,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/projects/:projectId",
+        element: <Project />,
+        loader: projectLoader,
+        errorElement: <ErrorPage />,
+      }
       
     ],
   },

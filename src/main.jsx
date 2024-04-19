@@ -6,11 +6,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./error-page";
-import Root from "./routes/root";
-import SignIn from "./routes/signin";
-import About from './routes/about';
-import Projects, {loader as projectsLoader} from './routes/projects';
-import Project, {loader as projectLoader} from './routes/project';
+import Root from "./routes/Root";
+import SignIn from "./routes/Signin";
+import About from './routes/About';
+import Projects, {loader as projectsLoader} from './routes/Projects';
+import Project, {loader as projectLoader} from './routes/Project';
+import { action as destroyAction } from './routes/destroy';
+import Editproject,{ action as editprojectAction } from './routes/Editproject';
+
 
 
 const router = createBrowserRouter([
@@ -43,8 +46,19 @@ const router = createBrowserRouter([
         element: <Project />,
         loader: projectLoader,
         errorElement: <ErrorPage />,
-      }
-      
+      },
+      {
+        path: "/projects/:projectId/edit",
+        element: <Editproject />,
+        loader: projectLoader,
+        action: editprojectAction,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/projects/:projectId/destroy",
+        action: destroyAction,
+        errorElement: <ErrorPage />,
+      },
     ],
   },
 ]);

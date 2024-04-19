@@ -1,10 +1,9 @@
 import { NavLink, useLoaderData } from "react-router-dom";
-import { getProjects } from "../projects";
+import { getProjects } from "../Projects";
 
 export async function loader() {
   const projects = await getProjects();
   if (!projects) {
-    console.log("projects not found");
 
     throw new Response("", {
       status: 404,
@@ -26,7 +25,7 @@ export default function Projects() {
               <div className="flex min-w-0 gap-x-4">
                 <img
                   className="h-24 w-24 flex-none  bg-gray-50"
-                  src="https://imgs.search.brave.com/qI-MeniGgKPStyOtnC4kTT6_-Ls1KYfqv7AIPrrBPSQ/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/NTkwNTMzMS9mci9w/aG90by9waG90b2dy/YXBoZS1kZS12b3lh/Z2UtcmV0ZW5hbnQt/ZGVzLWltYWdlcy12/dWUtc3VwJUMzJUE5/cmlldXJlLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1nRHZX/T1ZfWHVWdER4SEgw/Z0Z2bGdhTUhCMFpO/dzhhUkF6NXFRakVo/TUxnPQ"
+                  src={project.thumbnail}
                   alt=""
                 />
                 <div className="min-w-0 flex-auto">

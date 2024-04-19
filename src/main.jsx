@@ -13,6 +13,7 @@ import Projects, {loader as projectsLoader} from './routes/projects';
 import Project, {loader as projectLoader} from './routes/project';
 import { action as destroyAction } from './routes/destroy';
 import Editproject,{ action as editprojectAction } from './routes/editproject';
+import Createproject,{action as createprojectAction} from './routes/CreateProject';
 
 
 
@@ -59,6 +60,13 @@ const router = createBrowserRouter([
         action: destroyAction,
         errorElement: <ErrorPage />,
       },
+      {
+        path: "/projects/new",
+        element: <Createproject />,
+        action: createprojectAction,
+        errorElement: <ErrorPage />,
+
+      }
     ],
   },
 ]);

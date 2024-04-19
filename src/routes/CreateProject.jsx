@@ -1,28 +1,42 @@
 import { useState } from "react";
-import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
-import { getProject, updateProject } from "../projects";
-import "./editproject.css";
+import { Form,  redirect, useNavigate } from "react-router-dom";
+import { createProject } from "../projects";
 
 export async function action({ request, params }) {
   const formData = await request.formData();
   console.log(formData);
-  const updates = Object.fromEntries(formData);
-  console.log(updates);
-  updates.listWord = updates.listWord.split(",");
-  updates.illustrations = updates.illustrations.split(",");
+  const insert = Object.fromEntries(formData);
+  console.log(insert);
+  insert.listWord = insert.listWord.split(",");
+  insert.illustrations = insert.illustrations.split(",");
   //retire de update le champ word
-  delete updates.word;
-  delete updates.illustration;
-  await updateProject(updates);
-  return redirect(`/projects/${params.projectId}`);
+  delete insert.word;
+  delete insert.illustration;
+  await createProject(insert);
+  console.log(insert)
+  return redirect(`/projects`);
 }
 
-export default function Editproject() {
-  const { project } = useLoaderData();
+export default function Createproject() {
+  const project = {
+    thumbnail: "",
+    title: "",
+    descriptionIntro: "",
+    descriptionMain: "",
+    illustrations: [],
+    listWord: [],
+    link: "",
+    date: ""
+  }
+
+  console.log(project)
+  
   const navigate = useNavigate();
 
-  const [editedProject, setEditedProject] = useState(project);
+  const [createdProject, setCreatedProject] = useState(project);
+  
   const [thumbnail, setThumbnail] = useState(project.thumbnail);
+  
   const [descriptionMainWords, setDescriptionMainWords] = useState(
     project.descriptionMain.split(" ").filter((word) => word !== "")
   );
@@ -31,8 +45,10 @@ export default function Editproject() {
   const [word, setWord] = useState("");
   const [illustrations, setIllustrations] = useState(project.illustrations);
   const [illustration, setillustration] = useState("");
-
+  
+  
   return (
+    
     <div className="bg-white">
       <div className="container mx-auto flex flex-wrap py-6">
         <div className="w-full flex flex-col px-3">
@@ -58,7 +74,6 @@ export default function Editproject() {
                   }}
                 />
               </div>
-              <input type="hidden" name="id" defaultValue={project.id} />
               <label
                 htmlFor="title"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -99,15 +114,15 @@ export default function Editproject() {
                     name="descriptionMain"
                     id="descriptionMain"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={editedProject.descriptionMain}
+                    defaultValue={createdProject.descriptionMain}
                     onChange={(e) => {
                       const { name, value } = e.target;
                       const words = value
                         .split(" ")
                         .filter((worda) => worda !== "");
                       if (words.length <= 250) {
-                        setEditedProject({
-                          ...editedProject,
+                        setCreatedProject({
+                          ...createdProject,
                           [name]: value,
                         });
                         setDescriptionMainWords(words);
@@ -179,7 +194,7 @@ export default function Editproject() {
                     id="date"
                     name="date"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={editedProject.date}
+                    defaultValue={createdProject.date}
                   />
                   <label
                     htmlFor="illustrations"
@@ -237,12 +252,13 @@ export default function Editproject() {
                 </div>
               </div>
             </div>
+            
             <div className="container m-3 p-4">
               <button
                 className="rounded-md m-1 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 type="submit"
               >
-                Modifier
+                Enregistrer
               </button>
               <p>
                 <button

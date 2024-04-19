@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
-import { getProject, updateProject } from "../projects";
+import {  updateProject } from "../projects";
 import "./editproject.css";
 
 export async function action({ request, params }) {

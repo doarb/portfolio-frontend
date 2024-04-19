@@ -1,5 +1,6 @@
-import { Form, NavLink, useLoaderData } from "react-router-dom";
+import { Form,  useLoaderData } from "react-router-dom";
 import { getProject } from "../projects";
+import {consultProject } from "../Analysis";
 import "../index.css";
 
 export async function loader({ params }) {
@@ -10,6 +11,7 @@ export async function loader({ params }) {
       statusText: "Not Found",
     });
   }
+  await consultProject(params.projectId);
   return { project };
 }
 

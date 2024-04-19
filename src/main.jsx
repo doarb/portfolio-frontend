@@ -6,21 +6,22 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./error-page";
-import Root from "./routes/Root";
-import SignIn from "./routes/Signin";
+import Root, {loader as loaderRoot} from "./routes/Root";
+import SignIn, {action as signinAction} from "./routes/Signin";
 import About from './routes/about';
 import Projects, {loader as projectsLoader} from './routes/projects';
 import Project, {loader as projectLoader} from './routes/project';
 import { action as destroyAction } from './routes/destroy';
 import Editproject,{ action as editprojectAction } from './routes/editproject';
-import Createproject,{action as createprojectAction} from './routes/CreateProject';
-
-
+import Createproject,{ action as createprojectAction} from './routes/CreateProject';
+import Admin, {loader as adminloader} from './routes/Admin';
+import { action as SignOutAction } from './routes/SignOut';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    loader: loaderRoot,
 
 
     errorElement: <ErrorPage />,
@@ -29,6 +30,8 @@ const router = createBrowserRouter([
         
         path: "/signin",
         element: <SignIn />,
+        action: signinAction,
+
         errorElement: <ErrorPage />,
       },
       {
@@ -66,7 +69,18 @@ const router = createBrowserRouter([
         action: createprojectAction,
         errorElement: <ErrorPage />,
 
-      }
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
+        loader: adminloader,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/signout",
+        action: SignOutAction,
+        errorElement: <ErrorPage />,
+      },
     ],
   },
 ]);

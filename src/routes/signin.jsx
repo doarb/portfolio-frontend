@@ -1,6 +1,20 @@
+import { useState } from "react";
+import { login } from "../Users";
+import { Form,redirect } from "react-router-dom";
 
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  console.log(formData);
+  const log = Object.fromEntries(formData);
+  console.log(log);
+  const data = await login(log);
+  console.log(data);
+  return redirect("/admin");
+}
 
 export default function SignIn() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     return (
       <>
         
@@ -13,7 +27,7 @@ export default function SignIn() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <Form className="space-y-6"  method="POST">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                   Email
@@ -26,6 +40,7 @@ export default function SignIn() {
                     autoComplete="email"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -44,6 +59,7 @@ export default function SignIn() {
                     autoComplete="current-password"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -55,7 +71,7 @@ export default function SignIn() {
                   Sign in
                 </button>
               </div>
-            </form>
+            </Form>
           </div>
         </div>
       </>

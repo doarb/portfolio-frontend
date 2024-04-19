@@ -1,5 +1,7 @@
 //import sortBy from "sort-by";
 
+
+
 export async function getProjects() {
   const response = await fetch("http://localhost:5000/api/projects");
   const projects = await response.json();

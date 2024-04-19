@@ -6,8 +6,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./error-page";
-import Root, {loader as loaderRoot} from "./routes/Root";
-import SignIn, {action as signinAction} from "./routes/Signin";
+import Root, {loader as loaderRoot} from "./routes/root";
+import SignIn, {action as signinAction} from "./routes/signin";
 import About from './routes/about';
 import Projects, {loader as projectsLoader} from './routes/projects';
 import Project, {loader as projectLoader} from './routes/project';

@@ -1,4 +1,6 @@
 import localforage from "localforage";
+const URLBACK = import.meta.env.VITE_URL_BACK;
+
 
 export async function consultProject(log) {
   let analysis = {
@@ -6,7 +8,7 @@ export async function consultProject(log) {
     description: log,
     date: new Date(),
   };
-  const response = await fetch("http://localhost:5000/api/analysis/", {
+  const response = await fetch(URLBACK+"/api/analysis/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +25,7 @@ export async function CreateEmail(email) {
     description: email,
     date: new Date(),
   };
-  const response = await fetch("http://localhost:5000/api/analysis/", {
+  const response = await fetch(URLBACK+"/api/analysis/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +42,7 @@ export async function getProjectAnalysis() {
     type: "Project",
   };
 
-  const response = await fetch("http://localhost:5000/api/analysis/search", {
+  const response = await fetch(URLBACK+"/api/analysis/search", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token.accessToken}`,

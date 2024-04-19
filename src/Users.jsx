@@ -1,7 +1,7 @@
 import localforage from "localforage";
-
+const URLBACK = import.meta.env.VITE_URL_BACK;
 export async function login(log) {
-  const response = await fetch("http://localhost:5000/api/auth/login", {
+  const response = await fetch(URLBACK+"/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export async function login(log) {
 export async function getUsers() {
     const token = await localforage.getItem("token");
 
-    const response = await fetch("http://localhost:5000/api/users", {
+    const response = await fetch(URLBACK+"/api/users", {
         headers: {
             Authorization: `Bearer ${token.accessToken}`,
         },
@@ -57,7 +57,7 @@ export async function updateUser(id, user) {
 export async function createUser(user) {
     const token = await localforage.getItem("token");
 
-    await fetch("http://localhost:5000/api/users", {
+    await fetch(URLBACK+"/api/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export async function connected() {
   if (token === null) {
     return false;
   }
-  const response = await fetch("http://localhost:5000/api/auth/logCheck", {
+  const response = await fetch(URLBACK+"/api/auth/logCheck", {
     headers: {
       Authorization: `Bearer ${token.accessToken}`,
     },

@@ -1,5 +1,5 @@
 import { NavLink, useLoaderData } from "react-router-dom";
-import { getProjects } from "../Projects";
+import { getProjects } from "../projects";
 
 export async function loader() {
   const projects = await getProjects();

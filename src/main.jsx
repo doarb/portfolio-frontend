@@ -8,11 +8,11 @@ import {
 import ErrorPage from "./error-page";
 import Root from "./routes/Root";
 import SignIn from "./routes/Signin";
-import About from './routes/About';
-import Projects, {loader as projectsLoader} from './routes/Projects';
-import Project, {loader as projectLoader} from './routes/Project';
+import About from './routes/about';
+import Projects, {loader as projectsLoader} from './routes/projects';
+import Project, {loader as projectLoader} from './routes/project';
 import { action as destroyAction } from './routes/destroy';
-import Editproject,{ action as editprojectAction } from './routes/Editproject';
+import Editproject,{ action as editprojectAction } from './routes/editproject';
 
 
 

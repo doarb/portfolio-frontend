@@ -1,5 +1,5 @@
 import { Form, NavLink, useLoaderData } from "react-router-dom";
-import { getProject } from "../Projects";
+import { getProject } from "../projects";
 import "../index.css";
 
 export async function loader({ params }) {
